@@ -1,0 +1,28 @@
+div.content {
+  display: flex;
+  justify-content: center;
+  overflow:scroll;
+  margin-top: 25px;
+}
+
+.data-panel{
+  border: 1px solid black;
+}
+
+.data-panel .categ-title{
+  font-size: 20px;
+}
+
+.cases{
+  border: 1px solid black;
+}
+
+.countries{
+  margin-top: 25px;
+  padding: 10px;
+}
+
+span.data{
+  color: red;
+  font-size: 40px;
+}
