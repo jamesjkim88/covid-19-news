@@ -5,7 +5,7 @@ import VideoList from '../Components/VideoList';
 import VideoModal from '../Components/VideoModal';
 import DataPanel from '../Components/DataPanel';
 //import ContentContainer from '../Components/ContentContainer';
-import config from '../config.js';
+import config from '../../config.js';
 import axios from 'axios';
 import 'tachyons';
 
