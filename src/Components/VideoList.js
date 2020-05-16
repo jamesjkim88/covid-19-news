@@ -14,8 +14,8 @@ const VideoList = (props) => {
 
   const vidComp = props.videos.map((elm, i) => {
     return(
-      <Video
-        key={elm.id.videoId}
+      <Video 
+        key={i}
         thumbnail={elm.snippet.thumbnails.medium.url}
         title={elm.snippet.title}
         channelTitle={elm.snippet.channelTitle}
@@ -27,8 +27,8 @@ const VideoList = (props) => {
     )
   });
   return(
-    <div className='video-list fl w-80'>
-        {vidComp}
+    <div className='video-list eight wide column fr w-60'>
+      <div className="ui cards">{vidComp}</div>
     </div>
   )
 }

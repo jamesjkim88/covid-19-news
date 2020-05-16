@@ -5,11 +5,11 @@ div.content {
   margin-top: 25px;
 }
 
-.data-panel{
-  border: 1px solid black;
+.header{
+  padding-bottom: 25px;
 }
 
-.data-panel .categ-title{
+.categ-title{
   font-size: 20px;
 }
 
@@ -22,7 +22,7 @@ div.content {
   padding: 10px;
 }
 
-span.data{
+.data{
   color: red;
-  font-size: 40px;
+  font-size: 20px;
 }

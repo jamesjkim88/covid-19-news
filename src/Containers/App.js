@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import '../App.css';
-import MenuBar from '../Components/MenuBar';
 import VideoList from '../Components/VideoList';
 import VideoModal from '../Components/VideoModal';
 import DataPanel from '../Components/DataPanel';
-//import ContentContainer from '../Components/ContentContainer';
-import config from '../../config.js';
+import RedditPanel from '../Components/RedditPanel';
+import MenuBar from '../Components/MenuBar';
+import config from '../config.js';
 import axios from 'axios';
-import 'tachyons';
 
  /*
 
@@ -28,6 +27,9 @@ TODO:
   - resuable TitleHeader component
     - props
       - font size, what the title is, ...
+
+https://about-corona.net/documentation
+
 
 *****************************
 *****THIS ANNOYING SHIT******
@@ -52,7 +54,7 @@ TODO:
 
 let apiURL = 'https://www.googleapis.com/youtube/v3/search';
 let params = '?part=snippet&maxResults=50&order=date&q=coronavirus%20news&relevanceLanguage=en&key=${config}';
-const defaultQ = "coronavirus covid-19 news";
+const defaultQ = "coronavirus news";
 
 class App extends Component {
   constructor(props) {
@@ -60,12 +62,14 @@ class App extends Component {
     this.state = {
       vids: [],
       modVidLink: '',
-      q: ''
+      q: '',
+      covid19Data: {},
+      countryData: {}
     }
   }
 
   getData = async (term) => {
-    const resp = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+    const ytSearchResp = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
         part: 'snippet',
         maxResults: 50,
@@ -75,7 +79,18 @@ class App extends Component {
         key: config
       }
     });
-    this.setState({ vids: resp.data });
+
+    const covid19Data = await axios.get('https://covid19.mathdro.id/api')
+
+    const covid19CountryData = await axios.get('https://covid19.mathdro.id/api/countries/USA');
+
+    const testTest = await axios.get('https://corona-api.com/countries');
+
+    console.log(testTest);
+
+    this.setState({ countryData: covid19CountryData })
+    this.setState({ covid19Data: covid19Data.data })
+    this.setState({ vids: ytSearchResp.data });
   };
 
   getModVidLink = (modVidLink) => {
@@ -87,19 +102,23 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.q);
+    console.log(this.state.covid19CountryData);
     if(this.state.vids.length === 0){
       return(
         <h1>loading</h1>
       )
     }else{
       return (
-        <div className="App container">
-          <h1>Latest Covid-19 News</h1>
-          <MenuBar onSubmit={this.getData} />
-          <div className="content">
-            <DataPanel data="2,790,988"/>
+        <div className="special-container">
+          <div className="header">
+          <h1 className="content">Latest Covid-19 News</h1>
+          <h3 className="content">Get your latest prime covid-19 news around the world,<br/>anywhere from wherever you are</h3>
+          </div>
+          <MenuBar />
+          <div className="ui grid content-container">
+            <DataPanel covid19Data={this.state.covid19Data} covid19CountryData={this.state.countryData}/>
             <VideoList videos={this.state.vids.items} getModVidLink={this.getModVidLink} />
+            <RedditPanel />
           </div>
           <VideoModal modVidUrl={this.state.modVidLink} />
         </div>

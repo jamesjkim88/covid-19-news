@@ -29,9 +29,11 @@ aaf
     console.log(this.state.value);
     return(
       <div>
-        <form onSubmit={this.onFormSubmit}>
-          <input className="pa2 ba" type="text" placeholder="Search" value={this.state.value} onChange={this.onInputChange}/>
-        </form>
+        <form className="pa4 black-80">
+        <div className="measure">
+          <input id="name" placeholder="Search Videos" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" value={this.state.value} onChange={this.onInputChange} />
+        </div>
+      </form>
       </div>
     )
   }
