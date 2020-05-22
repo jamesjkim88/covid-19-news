@@ -17,7 +17,6 @@ const Video = (props) => {
   const modalOpen = () => {
     document.querySelector('.video-modal').style.display = 'flex';
     document.querySelector('.video-modal').style.top = `${window.scrollY}px`;
-    document.querySelector('.content').style.position = "fixed";
     props.getModVidLink(embedVidLink);
   }
 

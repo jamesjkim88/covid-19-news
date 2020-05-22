@@ -20,7 +20,6 @@ class VideoModal extends Component {
 
   closeModal = () => {
     this.divRef.current.style.display = "none";
-    document.querySelector('.content').style.position = "static";
   }
   
   iframeStyles = {
