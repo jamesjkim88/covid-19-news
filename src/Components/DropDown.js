@@ -12,23 +12,34 @@ import { Dropdown } from 'semantic-ui-react';
 import axios from 'axios';
 
 class DropDown extends Component {
+    state = {};
 
+  listCountry = this.props.country.map((elm, i) => {
+    return (
+      <option key={i} id={elm.name} value={elm.name}>{elm.name}</option>
+    )
+  });
 
-  constructor(props){
-    super(props);
-    this.state = {
-      countries: [],
-      value: ''
-    };
-    this.elmRef = React.createRef();
+  onInputChange = async () => {
+    const selectTag = document.querySelector('.ui .dropdown');
+    const data = await axios.get(`https://covid19.mathdro.id/api/countries/${selectTag.value}`);
+    this.props.onChangeVal(data.data, selectTag.value);
   }
 
-  onInputChange(evt) {
-    console.log(evt);
+  render() {
+    return (
+      <select ref={this.elmRef} className="ui dropdown" onChange={this.onInputChange}>
+        {this.listCountry}
+      </select>
+    )
   }
+}
 
-  getData = async () => {
-    const resp = await axios.get('https://covid19.mathdro.id/api/countries');
+export default DropDown;
+
+
+/*
+
     let arr = [];
 
     resp.data.countries.map((elm, i) => {
@@ -41,15 +52,7 @@ class DropDown extends Component {
     this.setState({
       countries: arr
     });
-  };
-
-  componentDidMount() {
-    this.getData();
-  }
-
-  render() {
-    return (
-        <Dropdown
+          <Dropdown
       placeholder='Select Country'
       fluid
       search
@@ -57,14 +60,6 @@ class DropDown extends Component {
       onChange={this.onInputChange}
       options={this.state.countries}
     />
-    )
-  }
-}
-
-export default DropDown;
-
-
-/*
 
     resp.data.data.map((elm) => {
       return arr.push({

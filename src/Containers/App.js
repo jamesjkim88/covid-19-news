@@ -64,7 +64,8 @@ class App extends Component {
       modVidLink: '',
       q: '',
       covid19Data: {},
-      country: []
+      country: [],
+      defaultCountry: {}
     }
   }
 
@@ -83,14 +84,12 @@ class App extends Component {
 
     const covid19Data = await axios.get('https://covid19.mathdro.id/api')
 
-    const covid19CountryData = await axios.get('https://covid19.mathdro.id/api/countries/USA');
+    const defaultDataUrl = await axios.get('https://covid19.mathdro.id/api/countries/USA');
 
-    const testTest = await axios.get('https://corona-api.com/countries');
-
-    console.log(testTest.data.data);
-
-    this.setState({ country: testTest.data.data})
-    this.setState({ countryData: covid19CountryData })
+    const countryList = await axios.get('https://covid19.mathdro.id/api/countries/');
+    
+    this.setState({ country: countryList.data.countries})
+    this.setState({ defaultCountry: defaultDataUrl.data })
     this.setState({ covid19Data: covid19Data.data })
     this.setState({ vids: ytSearchResp.data });
   };
@@ -119,7 +118,7 @@ class App extends Component {
           <Header header={this.topHeaderCopy.header} subhead={this.topHeaderCopy.subhead}/>
           <MenuBar onSubmit={this.getData} />
           <Container className="ui grid content-container">
-            <DataPanel country={this.state.country} covid19Data={this.state.covid19Data} covid19CountryData={this.state.countryData}/>
+            <DataPanel country={this.state.country} covid19Data={this.state.covid19Data} defaultCountry={this.state.defaultCountry}/>
             <VideoList videos={this.state.vids.items} getModVidLink={this.getModVidLink} />
             <RedditPanel />
           </Container>

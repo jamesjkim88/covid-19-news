@@ -11,8 +11,6 @@ export class MenuBar extends Component {
     value: ''
   }
 
-aaf
-
   onInputChange = (e) => {
     e.preventDefault();
     this.setState({ value: e.target.value})
