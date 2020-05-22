@@ -28,13 +28,14 @@ aaf
   render() {
     console.log(this.state.value);
     return(
-      <div>
-        <form className="pa4 black-80">
-        <div className="measure">
-          <input id="name" placeholder="Search Videos" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" value={this.state.value} onChange={this.onInputChange} />
-        </div>
-      </form>
-      </div>
+<div className="ui form marbot25">
+<div className="field six wide center">
+  <form onSubmit={this.onFormSubmit}>
+  <label>Videos</label>
+  <input id="name" placeholder="Search Videos" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" value={this.state.value} onChange={this.onInputChange} />
+  </form>
+</div>
+</div>
     )
   }
 }

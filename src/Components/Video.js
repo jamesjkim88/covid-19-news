@@ -35,7 +35,7 @@ const Video = (props) => {
   })(props.title)
 
   return(
-      <div className="video ui card v-top" id={`video-${props.vidLink}`}>
+    <div className="video ui card v-top grow" id={`video-${props.vidLink}`}>
       <p className="content"><a href={channelLink}>{props.channelTitle}</a></p>
       <div className="modal-open image" id={`tb-${props.vidLink}`} onClick={modalOpen}><img src={props.thumbnail} alt=""/></div>
       <div className="modal-open content" id={`title-${props.vidLink}`} onClick={modalOpen}><p>{decodeHtml}</p></div>

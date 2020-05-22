@@ -28,7 +28,9 @@ const VideoList = (props) => {
   });
   return(
     <div className='video-list eight wide column fr w-60'>
+      <div>
       <div className="ui cards">{vidComp}</div>
+      </div>
     </div>
   )
 }

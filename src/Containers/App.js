@@ -5,6 +5,8 @@ import VideoModal from '../Components/VideoModal';
 import DataPanel from '../Components/DataPanel';
 import RedditPanel from '../Components/RedditPanel';
 import MenuBar from '../Components/MenuBar';
+import Header from '../Components/Header'
+import Container from '../Components/Container';
 import config from '../config.js';
 import axios from 'axios';
 
@@ -52,9 +54,7 @@ https://about-corona.net/documentation
 
 */
 
-let apiURL = 'https://www.googleapis.com/youtube/v3/search';
-let params = '?part=snippet&maxResults=50&order=date&q=coronavirus%20news&relevanceLanguage=en&key=${config}';
-const defaultQ = "coronavirus news";
+
 
 class App extends Component {
   constructor(props) {
@@ -64,17 +64,18 @@ class App extends Component {
       modVidLink: '',
       q: '',
       covid19Data: {},
-      countryData: {}
+      country: []
     }
   }
 
+  defaultQ = "coronavirus news";
   getData = async (term) => {
     const ytSearchResp = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
         part: 'snippet',
         maxResults: 50,
         order: 'date',
-        q: `${defaultQ} ${term}`,
+        q: `${this.defaultQ} ${term}`,
         relevanceLanguage: 'en',
         key: config
       }
@@ -86,8 +87,9 @@ class App extends Component {
 
     const testTest = await axios.get('https://corona-api.com/countries');
 
-    console.log(testTest);
+    console.log(testTest.data.data);
 
+    this.setState({ country: testTest.data.data})
     this.setState({ countryData: covid19CountryData })
     this.setState({ covid19Data: covid19Data.data })
     this.setState({ vids: ytSearchResp.data });
@@ -97,31 +99,32 @@ class App extends Component {
     this.setState({ modVidLink });
   };
 
+  topHeaderCopy = {
+    header: "Latest Covid-19 News",
+    subhead: "Get your latest prime covid-19 news around the world,<br/>anywhere from wherever you are"
+  }
+
   componentDidMount() {
-    this.getData(defaultQ);
+    this.getData(this.defaultQ);
   };
 
   render() {
-    console.log(this.state.covid19CountryData);
     if(this.state.vids.length === 0){
       return(
         <h1>loading</h1>
       )
     }else{
       return (
-        <div className="special-container">
-          <div className="header">
-          <h1 className="content">Latest Covid-19 News</h1>
-          <h3 className="content">Get your latest prime covid-19 news around the world,<br/>anywhere from wherever you are</h3>
-          </div>
-          <MenuBar />
-          <div className="ui grid content-container">
-            <DataPanel covid19Data={this.state.covid19Data} covid19CountryData={this.state.countryData}/>
+        <Container className="special-container">
+          <Header header={this.topHeaderCopy.header} subhead={this.topHeaderCopy.subhead}/>
+          <MenuBar onSubmit={this.getData} />
+          <Container className="ui grid content-container">
+            <DataPanel country={this.state.country} covid19Data={this.state.covid19Data} covid19CountryData={this.state.countryData}/>
             <VideoList videos={this.state.vids.items} getModVidLink={this.getModVidLink} />
             <RedditPanel />
-          </div>
+          </Container>
           <VideoModal modVidUrl={this.state.modVidLink} />
-        </div>
+        </Container>
       );
     }
   }

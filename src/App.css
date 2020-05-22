@@ -1,5 +1,5 @@
 body{
-  background-color: #fff6f6;
+  background-color: #fff
 }
 
 body ::-webkit-scrollbar-track {
@@ -11,9 +11,9 @@ body ::-webkit-scrollbar-track {
   text-align: center;
 }
 
-/* .ui .cards {
+.ui .cards {
   justify-content: center;
-} */
+}
 
 a{
   color: #000;

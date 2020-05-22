@@ -1,8 +1,6 @@
-div.content {
-  display: flex;
-  justify-content: center;
-  overflow:scroll;
-  margin-top: 25px;
+
+.video{
+  box-shadow: 1px 2px 8px 0px #555 !important
 }
 
 .header{
@@ -13,8 +11,27 @@ div.content {
   font-size: 20px;
 }
 
+.center {
+  margin: 0 auto !important;
+}
+
+label{
+  float: left;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 2px 0;
+}
+
+.mt25{
+  margin-top: 25px;
+}
+
+.marbot25 {
+  margin-bottom: 25px;
+}
+
 .cases{
-  border: 1px solid black;
+  border: 1px solid #333;
 }
 
 .countries{
@@ -23,6 +40,10 @@ div.content {
 }
 
 .data{
-  color: red;
+  color: #bb2121;
   font-size: 20px;
+}
+
+.world-wide {
+  margin-bottom: 25px;
 }
