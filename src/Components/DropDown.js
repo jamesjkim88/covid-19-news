@@ -1,19 +1,8 @@
-/*
-
-  TODO:
-    - Get semantic ui dropdown to work
-    - for now use regular html option and select for now
-    - convert to functional component and code out like VideoList and Video
-
-*/
-
 import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import axios from 'axios';
 
 class DropDown extends Component {
-    state = {};
-
   listCountry = this.props.country.map((elm, i) => {
     return (
       <option key={i} id={elm.name} value={elm.name}>{elm.name}</option>

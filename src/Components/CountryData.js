@@ -3,8 +3,6 @@ import Header from './Header'
 import SelectedCountry from './SelectedCountry'
 
 export const CountryData = (props) => {
-
-
   return (
     <div className="cases mt25 selected-country">
       <Header header={props.countryName} />

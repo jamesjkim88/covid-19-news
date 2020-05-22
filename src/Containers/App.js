@@ -16,11 +16,9 @@ import axios from 'axios';
 TODO:
   - **date and time format**
     - time format seconds ago, minutes ago, hours ago, days ago, weeks ago, months ago, years ago
-  - **add filter functionaility to the menu bar**
-    - do more testing for bugs
-  - **scraping for number data from jhu**
-
-  - *scroll lock the page when modal is on* CSS
+  - **string formatting on some country names like South Korea and US and refilter the data alphabetically 
+  - **scroll lock the page when modal is on** CSS
+  
   - *look deeper into the api for better search results*
   - *update card height to match all*
 
